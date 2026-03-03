@@ -1,1 +1,96 @@
-app
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Click Game</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+}
+
+.game {
+    background: rgba(255,255,255,0.1);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+#score {
+    font-size: 2em;
+    margin: 10px 0;
+}
+
+#timer {
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    background: white;
+    color: #2a5298;
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+</style>
+</head>
+
+<body>
+
+<div class="game">
+    <h1>Click Game 🎯</h1>
+    <div id="score">Score: 0</div>
+    <div id="timer">Time: 10</div>
+    <button onclick="addScore()">CLICK!</button>
+</div>
+
+<script>
+let score = 0;
+let timeLeft = 10;
+let gameActive = true;
+
+const scoreDisplay = document.getElementById("score");
+const timerDisplay = document.getElementById("timer");
+
+function addScore() {
+    if (gameActive) {
+        score++;
+        scoreDisplay.textContent = "Score: " + score;
+    }
+}
+
+const countdown = setInterval(() => {
+    timeLeft--;
+    timerDisplay.textContent = "Time: " + timeLeft;
+
+    if (timeLeft <= 0) {
+        clearInterval(countdown);
+        gameActive = false;
+        alert("Game Over! Your Score: " + score);
+    }
+}, 1000);
+</script>
+
+</body>
+</html>
